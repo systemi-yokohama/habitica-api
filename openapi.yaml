@@ -1,3 +1,5 @@
+# https://habitica.com/apidoc/
+
 ---
 openapi: 3.1.1
 info:
@@ -655,6 +657,10 @@ components:
     Task:
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
+          description: The Task UUID
         text:
           type: string
           description: The text to be displayed for the task
@@ -677,6 +683,10 @@ components:
           type: string
           format: date
           description: Due date to be shown in task list. Only valid for type "todo"
+        dateCompleted:
+          type: string
+          format: date-time
+          description: Date when the todo was completed.
         priority:
           type: integer
           enum: [0.1, 1, 1.5, 2]
@@ -780,6 +790,164 @@ components:
           description: Last cron date-time
       required:
         - lastCron
+    UserTasksResponse:
+      allOf:
+        - $ref: "#/components/schemas/DataResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: "#/components/schemas/Task"
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+          description: The User UUID
+        username:
+          type: string
+        auth:
+          type: object
+          properties:
+            local:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+          description: Authentication details
+        stats:
+          type: object
+          properties:
+            hp:
+              type: number
+              description: Current Health
+            maxHealth:
+              type: number
+              description: Maximum Health
+            mp:
+              type: number
+              description: Current Mana
+            maxMP:
+              type: number
+              description: Maximum Mana
+            lvl:
+              type: integer
+              description: Current Level
+            gp:
+              type: number
+              description: Gold pieces
+            exp:
+              type: number
+              description: Current Experience
+            class:
+              type: string
+              enum: [warrior, wizard, rogue, healer]
+            toNextLevel:
+              type: integer
+          additionalProperties: true
+        profile:
+          type: object
+          properties:
+            name:
+              type: string
+            imageUrl:
+              type: string
+            blurb:
+              type: string
+          additionalProperties: true
+        items:
+          type: object
+          description: User inventory (gear, eggs, food, etc.)
+          additionalProperties: true
+        flags:
+          type: object
+          additionalProperties: true
+        preferences:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+      required:
+        - text
+        - type
+    UserResponse:
+      allOf:
+        - $ref: "#/components/schemas/DataResponse"
+        - type: object
+          properties:
+            data:
+              $ref: "#/components/schemas/User"
+    CreatedTaskResponse:
+      allOf:
+        - $ref: "#/components/schemas/DataResponse"
+        - type: object
+          properties:
+            data:
+              $ref: "#/components/schemas/Task"
+    TaskScoreData:
+      type: object
+      description: The data returned when scoring a task
+      properties:
+        delta:
+          type: number
+          description: The change in task value
+        _tmp:
+          type: object
+          description: Temporary data about the scoring
+          additionalProperties: true
+        hp:
+          type: number
+          description: Current health points
+        mp:
+          type: number
+          description: Current mana points
+        exp:
+          type: number
+          description: Current experience points
+        gp:
+          type: number
+          description: Current gold points
+        lvl:
+          type: integer
+          description: Current level
+        class:
+          type: string
+          enum: [warrior, wizard, rogue, healer]
+          description: User's class
+        points:
+          type: integer
+          description: Stat points available
+        str:
+          type: number
+          description: Strength stat
+        con:
+          type: number
+          description: Constitution stat
+        int:
+          type: number
+          description: Intelligence stat
+        per:
+          type: number
+          description: Perception stat
+        buffs:
+          type: object
+          description: Active buffs
+          additionalProperties: true
+        training:
+          type: object
+          description: Training data
+          additionalProperties: true
+      additionalProperties: true
+    TaskScoreResponse:
+      allOf:
+        - $ref: "#/components/schemas/DataResponse"
+        - type: object
+          properties:
+            data:
+              $ref: "#/components/schemas/TaskScoreData"
 paths:
   /v3/status:
     get:
@@ -1172,7 +1340,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DataResponse"
+                $ref: "#/components/schemas/UserResponse"
         "401":
           description: Unauthorized
           content:
@@ -2581,7 +2749,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DataResponse"
+                $ref: "#/components/schemas/UserTasksResponse"
         "401":
           description: Unauthorized
           content:
@@ -2609,7 +2777,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DataResponse"
+                $ref: "#/components/schemas/CreatedTaskResponse"
         "400":
           description: Bad Request
           content:
@@ -5371,7 +5539,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SuccessResponse"
+                $ref: "#/components/schemas/DataResponse"
         "400":
           description: Bad Request
           content:
@@ -6101,13 +6269,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DataResponse"
+
+                $ref: "#/components/schemas/TaskScoreResponse"
         "202":
           description: Accepted (Approval was requested for team task)
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DataResponse"
+
+                $ref: "#/components/schemas/TaskScoreResponse"
         "400":
           description: Bad Request
           content:
