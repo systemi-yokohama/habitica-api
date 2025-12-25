@@ -1,0 +1,37 @@
+parameters:
+  - name: challengeId
+    in: path
+    description: ID of the challenge to export
+    required: true
+    schema:
+      type: string
+      format: uuid
+get:
+  summary: Export Challenge to CSV
+  description: Export the specified challenge to a CSV file.
+  tags:
+    - challenges
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: CSV exported successfully
+      content:
+        text/csv:
+          schema:
+            type: string
+            format: binary
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Challenge not found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

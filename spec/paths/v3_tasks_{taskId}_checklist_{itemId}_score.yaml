@@ -1,0 +1,48 @@
+parameters:
+  - name: taskId
+    in: path
+    required: true
+    description: The task _id or alias
+    schema:
+      type: string
+  - name: itemId
+    in: path
+    required: true
+    description: The checklist item _id
+    schema:
+      type: string
+      format: uuid
+post:
+  summary: Score a checklist item
+  description: Score a checklist item within a task.
+  tags:
+    - tasks
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

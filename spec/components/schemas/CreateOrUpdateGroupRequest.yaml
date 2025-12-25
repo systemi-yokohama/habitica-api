@@ -1,0 +1,23 @@
+type: object
+required:
+  - name
+  - type
+  - privacy
+properties:
+  name:
+    type: string
+    description: The name of the new group.
+  type:
+    type: string
+    enum:
+      - guild
+      - party
+    example: guild
+    description: Type of group (guild or party)
+  privacy:
+    type: string
+    enum:
+      - private
+      - public
+    example: public
+    description: Privacy of group (party MUST be private)

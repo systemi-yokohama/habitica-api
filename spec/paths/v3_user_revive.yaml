@@ -1,0 +1,26 @@
+post:
+  summary: Revive user from death
+  description: >
+    Revive the authenticated user, restoring health and removing any penalties. 
+    \
+
+    See: [ApiDoc](https://habitica.com/apidoc/#api-User-UserRevive)
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

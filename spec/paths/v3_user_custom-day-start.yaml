@@ -1,0 +1,36 @@
+post:
+  summary: Set Custom Day Start time for user
+  description: Set the custom day start time for a user.
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CustomDayStartRequest.yaml
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: >-
+        Bad Request (Value provided is not a number or is outside the range of
+        0-23)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

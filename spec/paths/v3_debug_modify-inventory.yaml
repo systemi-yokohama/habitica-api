@@ -1,0 +1,37 @@
+post:
+  summary: Manipulate user's inventory
+  description: |
+    Modify user's inventory items for debugging purposes. \
+    **Required Permissions:** `Developers` \
+    See: [ApiDoc](https://habitica.com/apidoc/#api-Development-modifyInventory)
+  tags:
+    - development
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/InventoryModificationRequest.yaml
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

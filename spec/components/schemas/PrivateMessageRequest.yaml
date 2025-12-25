@@ -1,0 +1,12 @@
+type: object
+required:
+  - message
+  - toUserId
+properties:
+  message:
+    type: string
+    description: The private message to be sent.
+  toUserId:
+    type: string
+    format: uuid
+    description: The UUID of the user to whom the message will be sent.

@@ -1,0 +1,47 @@
+parameters:
+  - name: event
+    in: path
+    required: true
+    schema:
+      type: string
+      enum:
+        - wondercon
+        - google_6mo
+    description: The event for which the coupon should be generated.
+  - name: count
+    in: query
+    schema:
+      type: number
+    description: The number of coupon codes to generate.
+post:
+  summary: Generate Coupons for Event
+  description: |
+    Generate coupons for an event in Habitica. \
+    **Required Permission:** `sudo` *(whatever it means)*
+  tags:
+    - coupons
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: >-
+        Bad Request (The request was missing the count query parameter or used
+        an invalid event)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

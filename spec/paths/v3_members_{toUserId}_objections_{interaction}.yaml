@@ -1,0 +1,42 @@
+parameters:
+  - name: toUserId
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+    description: The user to interact with
+  - name: interaction
+    in: path
+    required: true
+    schema:
+      type: string
+      enum:
+        - send-private-message
+        - transfer-gems
+      default: send-private-message
+    description: Name of the interaction to query.
+get:
+  summary: Get objections to interaction
+  description: >-
+    Get any objections that would occur if the given interaction was attempted -
+    BETA.
+  tags:
+    - members
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: Member objections retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

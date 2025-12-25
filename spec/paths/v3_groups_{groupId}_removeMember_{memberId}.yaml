@@ -1,0 +1,56 @@
+parameters:
+  - name: groupId
+    in: path
+    required: true
+    schema:
+      type: string
+    description: >-
+      The group _id ('party' for the user party and 'habitrpg' for tavern are
+      accepted)
+  - name: memberId
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+    description: The ID of the member to be removed from the group.
+  - name: message
+    in: query
+    required: false
+    schema:
+      type: string
+    description: The message to send to the removed members.
+post:
+  summary: Remove a member from a group
+  description: Remove a member from a group.
+  tags:
+    - groups
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

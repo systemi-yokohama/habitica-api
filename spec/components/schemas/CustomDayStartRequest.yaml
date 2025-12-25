@@ -1,0 +1,10 @@
+type: object
+properties:
+  dayStart:
+    type: number
+    description: >-
+      The hour number (0-23) for the day to begin. If not supplied, it will
+      default to 0.
+    minimum: 0
+    maximum: 23
+    default: 0

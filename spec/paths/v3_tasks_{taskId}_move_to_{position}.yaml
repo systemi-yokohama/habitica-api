@@ -1,0 +1,55 @@
+parameters:
+  - name: taskId
+    in: path
+    required: true
+    description: The task _id or alias
+    schema:
+      type: string
+  - name: position
+    in: path
+    required: true
+    description: >-
+      Where to move the task. 0 = top of the list ("push to top"). -1 = bottom
+      of the list ("push to bottom")
+    schema:
+      type: integer
+post:
+  summary: Move a task to a new position
+  description: >
+    Note: completed To Do's are not sortable, do not appear in
+    user.tasksOrder.todos, and are ordered by date of completion. \
+
+    See [ApiDoc](https://habitica.com/apidoc/#api-Task-MoveTask)
+  tags:
+    - tasks
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: >-
+        OK (The new tasks order for the specific type that the taskID belongs
+        to)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

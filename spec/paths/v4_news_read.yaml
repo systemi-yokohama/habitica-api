@@ -1,0 +1,22 @@
+post:
+  summary: Mark the latest Bailey announcement as read
+  description: Mark the latest Bailey announcement as read
+  tags:
+    - news
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: News articles marked as read successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

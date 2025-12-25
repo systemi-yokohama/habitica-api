@@ -1,0 +1,60 @@
+parameters:
+  - name: groupId
+    in: path
+    required: true
+    schema:
+      type: string
+      description: >-
+        The group id ('party' for the user party and 'habitrpg' for tavern are
+        accepted)
+  - name: chatId
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+      description: The UUID of the chat message to delete.
+delete:
+  summary: Delete chat message from a group
+  description: Delete's a chat message from a group.
+  tags:
+    - chat
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  parameters:
+    - name: previousMsg
+      in: query
+      required: false
+      schema:
+        type: string
+        format: uuid
+      description: >-
+        The last message's ID fetched by the client so that the whole chat will
+        be returned only if new messages have been posted in the meantime.
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found (The specified group or message could't be found)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

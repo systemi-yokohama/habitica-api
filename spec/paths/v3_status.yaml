@@ -1,0 +1,16 @@
+get:
+  summary: Get Habitica API status
+  description: >
+    Endpoint to get the current status of the Habitica API. \
+
+    Returns typical data object with string property "status" that has the value
+    `up`, if the server is running.
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '500':
+      description: Internal Server Error (The server is down)

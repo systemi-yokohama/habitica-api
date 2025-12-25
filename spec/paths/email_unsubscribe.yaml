@@ -1,0 +1,37 @@
+servers:
+  - url: https://habitica.com
+get:
+  summary: Unsubscribe an email address or user from email notifications
+  description: >
+    This is a GET method included in official emails from Habitica that will
+    unsubscribe the user from emails. Does not require authentication. \
+
+    See: [ApiDocs](https://habitica.com/apidoc/#api-Unsubscribe)
+  parameters:
+    - name: code
+      in: query
+      schema:
+        type: string
+      description: >-
+        An unsubscription code that contains an encrypted User ID or email
+        address
+  responses:
+    '200':
+      description: OK
+      content:
+        text/html:
+          schema:
+            type: string
+            format: binary
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

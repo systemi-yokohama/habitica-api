@@ -1,0 +1,348 @@
+openapi: 3.1.1
+info:
+  title: Habitica API
+  description: Habitica API representation as OpenAPI spec
+  version: 1.0.0
+  contact:
+    name: Specification repository
+    url: https://github.com/igromanru/habitica-api
+externalDocs:
+  url: https://habitica.com/apidoc/
+  description: Official Habitica API Documentation
+servers:
+  - url: https://habitica.com/api
+    description: Habitica API server
+tags:
+  - name: default
+  - name: hall
+    description: Hall of Fame related requests
+  - name: members
+    description: Habitica members related requests
+  - name: user
+    description: User related requests
+  - name: tasks
+    description: Tasks related requests
+  - name: tags
+    description: Tags related requests
+  - name: party
+    description: Party related requests
+  - name: groups
+    description: |
+      Groups related requests \
+      Most endpoints accept 'party' and 'habitrpg' as the {groupId} \
+      Use `party` for user's current party and `habitrpg` for the tavern
+  - name: chat
+    description: Chat related requests
+  - name: challenges
+    description: Challenges related requests
+  - name: webhook
+    description: Webhooks
+  - name: news
+    description: Habitica News related requests
+  - name: notifications
+    description: Notifications related requests
+  - name: coupons
+    description: Coupons related requests
+  - name: data-export
+    description: Data Export related requests
+  - name: development
+    description: >
+      Development related requests \
+
+      **These routes only exist while Habitica is in development mode. (Such as
+      running a local instance on your computer)**
+components:
+  securitySchemes:
+    userId:
+      type: apiKey
+      in: header
+      name: x-api-user
+    apiToken:
+      type: apiKey
+      in: header
+      name: x-api-key
+    xClient:
+      type: apiKey
+      in: header
+      name: x-client
+paths:
+  /v3/status:
+    $ref: paths/v3_status.yaml
+  /v3/cron:
+    $ref: paths/v3_cron.yaml
+  /v4/bug-report:
+    $ref: paths/v4_bug-report.yaml
+  /email/unsubscribe:
+    $ref: paths/email_unsubscribe.yaml
+  /v3/i18n/browser-script:
+    $ref: paths/v3_i18n_browser-script.yaml
+  /v3/world-state:
+    $ref: paths/v3_world-state.yaml
+  /v3/content:
+    $ref: paths/v3_content.yaml
+  /v3/members/{memberId}:
+    $ref: paths/v3_members_{memberId}.yaml
+  /v3/members/{memberId}/achievements:
+    $ref: paths/v3_members_{memberId}_achievements.yaml
+  /v3/members/send-private-message:
+    $ref: paths/v3_members_send-private-message.yaml
+  /v3/members/{toUserId}/objections/{interaction}:
+    $ref: paths/v3_members_{toUserId}_objections_{interaction}.yaml
+  /v3/members/transfer-gems:
+    $ref: paths/v3_members_transfer-gems.yaml
+  /v3/user:
+    $ref: paths/v3_user.yaml
+  /v3/user/anonymized:
+    $ref: paths/v3_user_anonymized.yaml
+  /v3/user/class/cast/{spellId}:
+    $ref: paths/v3_user_class_cast_{spellId}.yaml
+  /v3/user/sleep:
+    $ref: paths/v3_user_sleep.yaml
+  /v3/user/mark-pms-read:
+    $ref: paths/v3_user_mark-pms-read.yaml
+  /v3/user/open-mystery-item:
+    $ref: paths/v3_user_open-mystery-item.yaml
+  /v3/user/read-card/{cardType}:
+    $ref: paths/v3_user_read-card_{cardType}.yaml
+  /v3/user/change-class:
+    $ref: paths/v3_user_change-class.yaml
+  /v3/user/disable-classes:
+    $ref: paths/v3_user_disable-classes.yaml
+  /v3/user/messages:
+    $ref: paths/v3_user_messages.yaml
+  /v3/user/messages/{id}:
+    $ref: paths/v3_user_messages_{id}.yaml
+  /v3/user/custom-day-start:
+    $ref: paths/v3_user_custom-day-start.yaml
+  /v3/user/purchase/{type}/{key}:
+    $ref: paths/v3_user_purchase_{type}_{key}.yaml
+  /v3/user/purchase-hourglass/{type}/{key}:
+    $ref: paths/v3_user_purchase-hourglass_{type}_{key}.yaml
+  /v3/user/buy-health-potion:
+    $ref: paths/v3_user_buy-health-potion.yaml
+  /v3/user/buy-mystery-set/{key}:
+    $ref: paths/v3_user_buy-mystery-set_{key}.yaml
+  /v3/user/buy/{key}:
+    $ref: paths/v3_user_buy_{key}.yaml
+  /v3/user/buy-gear/{key}:
+    $ref: paths/v3_user_buy-gear_{key}.yaml
+  /v3/user/buy-special-spell/{key}:
+    $ref: paths/v3_user_buy-special-spell_{key}.yaml
+  /v3/user/buy-quest/{key}:
+    $ref: paths/v3_user_buy-quest_{key}.yaml
+  /v3/user/buy-armoire:
+    $ref: paths/v3_user_buy-armoire.yaml
+  /v3/user/sell/{type}/{key}:
+    $ref: paths/v3_user_sell_{type}_{key}.yaml
+  /v4/user/unequip/{type}:
+    $ref: paths/v4_user_unequip_{type}.yaml
+  /v3/user/unlock:
+    $ref: paths/v3_user_unlock.yaml
+  /v3/user/allocate:
+    $ref: paths/v3_user_allocate.yaml
+  /v3/user/allocate-now:
+    $ref: paths/v3_user_allocate-now.yaml
+  /v3/user/allocate-bulk:
+    $ref: paths/v3_user_allocate-bulk.yaml
+  /v3/user/reroll:
+    $ref: paths/v3_user_reroll.yaml
+  /v3/user/revive:
+    $ref: paths/v3_user_revive.yaml
+  /v3/user/rebirth:
+    $ref: paths/v3_user_rebirth.yaml
+  /v4/user/purchase-history:
+    $ref: paths/v4_user_purchase-history.yaml
+  /v3/user/reset:
+    $ref: paths/v3_user_reset.yaml
+  /v3/user/block/{uuid}:
+    $ref: paths/v3_user_block_{uuid}.yaml
+  /v3/inbox/messages:
+    $ref: paths/v3_inbox_messages.yaml
+  /v3/user/auth/local/register:
+    $ref: paths/v3_user_auth_local_register.yaml
+  /v3/user/auth/update-username:
+    $ref: paths/v3_user_auth_update-username.yaml
+  /v3/user/auth/update-email:
+    $ref: paths/v3_user_auth_update-email.yaml
+  /v3/user/auth/update-password:
+    $ref: paths/v3_user_auth_update-password.yaml
+  /v3/tasks/user:
+    $ref: paths/v3_tasks_user.yaml
+  /v3/tasks/clearCompletedTodos:
+    $ref: paths/v3_tasks_clearCompletedTodos.yaml
+  /v3/looking-for-party:
+    $ref: paths/v3_looking-for-party.yaml
+  /v3/groups:
+    $ref: paths/v3_groups.yaml
+  /v3/groups/{groupId}:
+    $ref: paths/v3_groups_{groupId}.yaml
+  /v3/groups/{groupId}/members:
+    $ref: paths/v3_groups_{groupId}_members.yaml
+  /v3/groups/{groupId}/invites:
+    $ref: paths/v3_groups_{groupId}_invites.yaml
+  /v3/groups/{groupId}/add-manager:
+    $ref: paths/v3_groups_{groupId}_add-manager.yaml
+  /v3/groups/{groupId}/remove-manager:
+    $ref: paths/v3_groups_{groupId}_remove-manager.yaml
+  /v3/groups/{groupId}/invite:
+    $ref: paths/v3_groups_{groupId}_invite.yaml
+  /v3/groups/{groupId}/removeMember/{memberId}:
+    $ref: paths/v3_groups_{groupId}_removeMember_{memberId}.yaml
+  /v3/groups/{groupId}/join:
+    $ref: paths/v3_groups_{groupId}_join.yaml
+  /v3/groups/{groupId}/leave:
+    $ref: paths/v3_groups_{groupId}_leave.yaml
+  /v3/groups/{groupId}/reject-invite:
+    $ref: paths/v3_groups_{groupId}_reject-invite.yaml
+  /v3/groups/{groupId}/quests/accept:
+    $ref: paths/v3_groups_{groupId}_quests_accept.yaml
+  /v3/groups/{groupId}/quests/reject:
+    $ref: paths/v3_groups_{groupId}_quests_reject.yaml
+  /v3/groups/{groupId}/quests/leave:
+    $ref: paths/v3_groups_{groupId}_quests_leave.yaml
+  /v3/groups/{groupId}/quests/cancel:
+    $ref: paths/v3_groups_{groupId}_quests_cancel.yaml
+  /v3/groups/{groupId}/quests/abort:
+    $ref: paths/v3_groups_{groupId}_quests_abort.yaml
+  /v3/groups/{groupId}/quests/force-start:
+    $ref: paths/v3_groups_{groupId}_quests_force-start.yaml
+  /v3/groups/{groupId}/quests/invite/{questKey}:
+    $ref: paths/v3_groups_{groupId}_quests_invite_{questKey}.yaml
+  /v3/group-plans:
+    $ref: paths/v3_group-plans.yaml
+  /v3/groups/create-plan:
+    $ref: paths/v3_groups_create-plan.yaml
+  /v3/groups/party/chat:
+    $ref: paths/v3_groups_party_chat.yaml
+  /v3/groups/{groupId}/chat:
+    $ref: paths/v3_groups_{groupId}_chat.yaml
+  /v3/groups/{groupId}/chat/{chatId}:
+    $ref: paths/v3_groups_{groupId}_chat_{chatId}.yaml
+  /v3/groups/{groupId}/chat/{chatId}/like:
+    $ref: paths/v3_groups_{groupId}_chat_{chatId}_like.yaml
+  /v3/groups/{groupId}/chat/seen:
+    $ref: paths/v3_groups_{groupId}_chat_seen.yaml
+  /v3/groups/{groupId}/chat/{chatId}/flag:
+    $ref: paths/v3_groups_{groupId}_chat_{chatId}_flag.yaml
+  /v3/groups/{groupId}/chat/{chatId}/clearflags:
+    $ref: paths/v3_groups_{groupId}_chat_{chatId}_clearflags.yaml
+  /v3/challenges:
+    $ref: paths/v3_challenges.yaml
+  /v3/challenges/user:
+    $ref: paths/v3_challenges_user.yaml
+  /v3/challenges/{challengeId}:
+    $ref: paths/v3_challenges_{challengeId}.yaml
+  /v3/challenges/{challengeId}/join:
+    $ref: paths/v3_challenges_{challengeId}_join.yaml
+  /v3/challenges/{challengeId}/leave:
+    $ref: paths/v3_challenges_{challengeId}_leave.yaml
+  /v3/challenges/{challengeId}/clone:
+    $ref: paths/v3_challenges_{challengeId}_clone.yaml
+  /v3/challenges/{challengeId}/export/csv:
+    $ref: paths/v3_challenges_{challengeId}_export_csv.yaml
+  /v3/challenges/groups/{groupId}:
+    $ref: paths/v3_challenges_groups_{groupId}.yaml
+  /v3/challenges/{challengeId}/members:
+    $ref: paths/v3_challenges_{challengeId}_members.yaml
+  /v3/challenges/{challengeId}/members/{memberId}:
+    $ref: paths/v3_challenges_{challengeId}_members_{memberId}.yaml
+  /v3/challenges/{challengeId}/selectWinner/{winnerId}:
+    $ref: paths/v3_challenges_{challengeId}_selectWinner_{winnerId}.yaml
+  /v3/user/webhook:
+    $ref: paths/v3_user_webhook.yaml
+  /v3/user/webhook/{id}:
+    $ref: paths/v3_user_webhook_{id}.yaml
+  /v3/models/{model}/paths:
+    $ref: paths/v3_models_{model}_paths.yaml
+  /v3/hall/heroes:
+    $ref: paths/v3_hall_heroes.yaml
+  /v3/hall/patrons:
+    $ref: paths/v3_hall_patrons.yaml
+  /v3/hall/heroes/party/{groupId}:
+    $ref: paths/v3_hall_heroes_party_{groupId}.yaml
+  /v3/hall/heroes/{heroId}:
+    $ref: paths/v3_hall_heroes_{heroId}.yaml
+  /v3/news:
+    $ref: paths/v3_news.yaml
+  /v4/news/read:
+    $ref: paths/v4_news_read.yaml
+  /v3/news/tell-me-later:
+    $ref: paths/v3_news_tell-me-later.yaml
+  /v4/news:
+    $ref: paths/v4_news.yaml
+  /v4/news/{postId}:
+    $ref: paths/v4_news_{postId}.yaml
+  /v3/notifications/read:
+    $ref: paths/v3_notifications_read.yaml
+  /v3/notifications/see:
+    $ref: paths/v3_notifications_see.yaml
+  /v3/notifications/{notificationId}/read:
+    $ref: paths/v3_notifications_{notificationId}_read.yaml
+  /v3/notifications/{notificationId}/see:
+    $ref: paths/v3_notifications_{notificationId}_see.yaml
+  /v3/tasks/{taskId}:
+    $ref: paths/v3_tasks_{taskId}.yaml
+  /v3/tasks/{taskId}/tags/{tagId}:
+    $ref: paths/v3_tasks_{taskId}_tags_{tagId}.yaml
+  /v3/tasks/{taskId}/checklist:
+    $ref: paths/v3_tasks_{taskId}_checklist.yaml
+  /v3/tasks/{taskId}/checklist/{itemId}:
+    $ref: paths/v3_tasks_{taskId}_checklist_{itemId}.yaml
+  /v3/tasks/{taskId}/assign:
+    $ref: paths/v3_tasks_{taskId}_assign.yaml
+  /v3/tasks/challenge/{challengeId}:
+    $ref: paths/v3_tasks_challenge_{challengeId}.yaml
+  /v3/tasks/group/{groupId}:
+    $ref: paths/v3_tasks_group_{groupId}.yaml
+  /v3/tasks/{taskId}/move/to/{position}:
+    $ref: paths/v3_tasks_{taskId}_move_to_{position}.yaml
+  /v3/group/{groupId}/tasks/{taskId}/move/to/{position}:
+    $ref: paths/v3_group_{groupId}_tasks_{taskId}_move_to_{position}.yaml
+  /v3/tasks/{taskId}/needs-work/{userId}:
+    $ref: paths/v3_tasks_{taskId}_needs-work_{userId}.yaml
+  /v3/tasks/{taskId}/checklist/{itemId}/score:
+    $ref: paths/v3_tasks_{taskId}_checklist_{itemId}_score.yaml
+  /v3/tasks/{taskId}/score/{direction}:
+    $ref: paths/v3_tasks_{taskId}_score_{direction}.yaml
+  /v3/tasks/{taskId}/unassign/{assignedUserId}:
+    $ref: paths/v3_tasks_{taskId}_unassign_{assignedUserId}.yaml
+  /tasks/unlink-one/{taskId}:
+    $ref: paths/tasks_unlink-one_{taskId}.yaml
+  /v3/tasks/unlink-all/{challengeId}:
+    $ref: paths/v3_tasks_unlink-all_{challengeId}.yaml
+  /v3/tags:
+    $ref: paths/v3_tags.yaml
+  /v3/tags/{tagId}:
+    $ref: paths/v3_tags_{tagId}.yaml
+  /v3/reorder-tags:
+    $ref: paths/v3_reorder-tags.yaml
+  /v3/coupons/generate/{event}:
+    $ref: paths/v3_coupons_generate_{event}.yaml
+  /v3/coupons:
+    $ref: paths/v3_coupons.yaml
+  /v3/coupons/enter/{code}:
+    $ref: paths/v3_coupons_enter_{code}.yaml
+  /v3/coupons/validate/{code}:
+    $ref: paths/v3_coupons_validate_{code}.yaml
+  /export/userdata.json:
+    $ref: paths/export_userdata.json.yaml
+  /export/userdata.xml:
+    $ref: paths/export_userdata.xml.yaml
+  /export/inbox.html:
+    $ref: paths/export_inbox.html.yaml
+  /export/history.csv:
+    $ref: paths/export_history.csv.yaml
+  /export/avatar-{uuid}.png:
+    $ref: paths/export_avatar-{uuid}.png.yaml
+  /export/avatar-{uuid}.html:
+    $ref: paths/export_avatar-{uuid}.html.yaml
+  /v3/debug/add-hourglass:
+    $ref: paths/v3_debug_add-hourglass.yaml
+  /v3/debug/add-ten-gems:
+    $ref: paths/v3_debug_add-ten-gems.yaml
+  /v3/debug/quest-progress:
+    $ref: paths/v3_debug_quest-progress.yaml
+  /v3/debug/modify-inventory:
+    $ref: paths/v3_debug_modify-inventory.yaml
+  /v3/debug/set-cron:
+    $ref: paths/v3_debug_set-cron.yaml

@@ -1,0 +1,37 @@
+servers:
+  - url: https://habitica.com
+parameters:
+  - name: uuid
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+    description: The UUID of the user.
+get:
+  summary: Render a user avatar as an HTML page
+  description: >-
+    **This HTML export feature is not currently working
+    (https://github.com/HabitRPG/habitica/issues/9489).**
+  tags:
+    - data-export
+  responses:
+    '200':
+      description: OK
+      content:
+        text/html:
+          schema:
+            type: string
+            format: binary
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

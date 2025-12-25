@@ -1,0 +1,39 @@
+parameters:
+  - name: model
+    in: path
+    description: Model name
+    required: true
+    schema:
+      type: string
+      enum:
+        - user
+        - group
+        - challenge
+        - tag
+        - habit
+        - daily
+        - todo
+        - reward
+    example: user
+get:
+  summary: Get paths for a specific model
+  description: Retrieve the paths associated with the specified model.
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Model not found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

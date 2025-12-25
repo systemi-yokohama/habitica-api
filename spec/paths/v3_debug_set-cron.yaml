@@ -1,0 +1,38 @@
+post:
+  summary: Set lastCron for user
+  description: |
+    Set lastCron to the user's account for debugging purposes. \
+    **Required Permissions:** `Developers` \
+    *The official Habitica Doc hasn't provided any parameters for the request* \
+    See: [ApiDocs](https://habitica.com/apidoc/#api-Development-setCron)
+  tags:
+    - development
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SetLastCronRequest.yaml
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

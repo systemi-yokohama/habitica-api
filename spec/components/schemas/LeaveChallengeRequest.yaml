@@ -1,0 +1,11 @@
+type: object
+properties:
+  keep:
+    type: string
+    enum:
+      - remove-all
+      - keep-all
+    default: keep-all
+    description: >-
+      Specify whether to remove all or keep all challenge-related tasks upon
+      leaving.

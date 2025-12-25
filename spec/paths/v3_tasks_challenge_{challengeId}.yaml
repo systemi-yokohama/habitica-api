@@ -1,0 +1,98 @@
+parameters:
+  - name: challengeId
+    in: path
+    required: true
+    description: The id of the challenge
+    schema:
+      type: string
+      format: uuid
+get:
+  summary: Get a challenge's tasks
+  description: Retrieve tasks associated with a specific challenge.
+  tags:
+    - tasks
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  parameters:
+    - name: type
+      in: query
+      required: false
+      description: Query parameter to return just a type of tasks.
+      schema:
+        type: string
+        enum:
+          - habits
+          - dailys
+          - todos
+          - rewards
+  responses:
+    '200':
+      description: OK (An array of tasks)
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Task.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+post:
+  summary: Create a new task belonging to a challenge
+  description: >-
+    Can be passed an object to create a single task or an array of objects to
+    create multiple tasks.
+  tags:
+    - tasks
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Task.yaml
+  responses:
+    '201':
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

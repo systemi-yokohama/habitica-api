@@ -1,0 +1,7 @@
+type: object
+properties:
+  password:
+    type: string
+  feedback:
+    type: string
+    example: I'm leaving because...

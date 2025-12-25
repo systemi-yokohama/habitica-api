@@ -1,0 +1,31 @@
+post:
+  summary: Run cron
+  description: >-
+    This causes cron to run. It assumes that the user has already been shown the
+    Record Yesterday's Activity ("Check off any Dailies you did yesterday")
+    screen and so it will immediately apply damage for incomplete due Dailies.
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: Cron executed successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

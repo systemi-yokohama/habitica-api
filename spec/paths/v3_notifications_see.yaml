@@ -1,0 +1,24 @@
+post:
+  summary: Mark Notifications as Seen
+  description: Mark all notifications as seen.
+  tags:
+    - notifications
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: >-
+        OK (Notifications marked as seen successfully, returns
+        user.notifications)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

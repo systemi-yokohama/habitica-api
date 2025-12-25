@@ -1,0 +1,37 @@
+parameters:
+  - name: key
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The item to buy
+post:
+  summary: Buy gear, armoire or potion
+  description: |
+    Under the hood uses UserBuyGear, UserBuyPotion and UserBuyArmoire \
+    See: [ApiDoc](https://habitica.com/apidoc/#api-User-UserBuy)
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request (Not enough gold for the purchase or already own equipment)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

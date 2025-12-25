@@ -1,0 +1,33 @@
+parameters:
+  - name: challengeId
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+    description: The ID of the challenge.
+  - name: memberId
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+    description: The ID of the challenge member.
+get:
+  summary: Get a challenge member progress
+  description: Get a challenge member progress.
+  tags:
+    - challenges
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

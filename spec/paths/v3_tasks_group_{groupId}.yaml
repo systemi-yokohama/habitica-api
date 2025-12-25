@@ -1,0 +1,93 @@
+parameters:
+  - name: groupId
+    in: path
+    required: true
+    schema:
+      type: string
+    description: >-
+      The group id ('party' for the user party and 'habitrpg' for tavern are
+      accepted)
+get:
+  summary: Get a group's tasks
+  description: Retrieve tasks associated with a specific group.
+  tags:
+    - tasks
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  parameters:
+    - name: type
+      in: query
+      required: false
+      description: Query parameter to return just a type of tasks.
+      schema:
+        type: string
+        enum:
+          - habits
+          - dailys
+          - todos
+          - rewards
+  responses:
+    '200':
+      description: OK (An array of tasks)
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Task.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+post:
+  summary: Create a new task belonging to a group
+  description: >-
+    Can be passed an object to create a single task or an array of objects to
+    create multiple tasks.
+  tags:
+    - tasks
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Task.yaml
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

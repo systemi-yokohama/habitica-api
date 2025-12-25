@@ -1,0 +1,24 @@
+post:
+  summary: Allow latest Bailey announcement to be read later
+  description: >-
+    Add a notification to allow viewing of the latest "New Stuff by Bailey"
+    message. Prevent this specific Bailey message from appearing automatically
+  tags:
+    - news
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: Request to be notified later successful
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

@@ -1,0 +1,31 @@
+post:
+  summary: Add ten gems to the current user
+  description: |
+    Add ten gems to the user's account for debugging purposes. \
+    **Required Permissions:** `Developers` \
+    See: [ApiDoc](https://habitica.com/apidoc/#api-Development-AddTenGems)
+  tags:
+    - development
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

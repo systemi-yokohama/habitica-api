@@ -1,0 +1,22 @@
+post:
+  summary: Reroll user stats
+  description: Reroll a user (reset tasks) using the Fortify Potion.
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: User stats rerolled successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

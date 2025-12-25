@@ -1,0 +1,12 @@
+type: object
+properties:
+  message:
+    type: string
+    description: The message to the user
+  toUserId:
+    type: string
+    format: uuid
+    description: The user to send the gift to
+  gemAmount:
+    type: integer
+    description: The number of gems to send

@@ -1,0 +1,22 @@
+type: object
+properties:
+  stats:
+    type: object
+    properties:
+      int:
+        type: number
+        description: The number of points to allocate to INT (Intelligence) stat.
+      str:
+        type: number
+        description: The number of points to allocate to STR (Strength) stat.
+      con:
+        type: number
+        description: The number of points to allocate to CON (Constitution) stat.
+      per:
+        type: number
+        description: The number of points to allocate to PER (Perception) stat.
+    required:
+      - int
+      - str
+      - con
+      - per

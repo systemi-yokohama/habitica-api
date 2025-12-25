@@ -1,0 +1,57 @@
+type: object
+description: The data returned when scoring a task
+properties:
+  delta:
+    type: number
+    description: The change in task value
+  _tmp:
+    type: object
+    description: Temporary data about the scoring
+    additionalProperties: true
+  hp:
+    type: number
+    description: Current health points
+  mp:
+    type: number
+    description: Current mana points
+  exp:
+    type: number
+    description: Current experience points
+  gp:
+    type: number
+    description: Current gold points
+  lvl:
+    type: integer
+    description: Current level
+  class:
+    type: string
+    enum:
+      - warrior
+      - wizard
+      - rogue
+      - healer
+    description: User's class
+  points:
+    type: integer
+    description: Stat points available
+  str:
+    type: number
+    description: Strength stat
+  con:
+    type: number
+    description: Constitution stat
+  int:
+    type: number
+    description: Intelligence stat
+  per:
+    type: number
+    description: Perception stat
+  buffs:
+    type: object
+    description: Active buffs
+    additionalProperties: true
+  training:
+    type: object
+    description: Training data
+    additionalProperties: true
+additionalProperties: true

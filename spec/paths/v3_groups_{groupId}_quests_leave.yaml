@@ -1,0 +1,41 @@
+parameters:
+  - name: groupId
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The group _id (or 'party')
+post:
+  summary: Leave Group Quest
+  description: Leave the ongoing quest.
+  tags:
+    - groups
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: Successfully left the group quest
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found (Group or Quest not found)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

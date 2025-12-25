@@ -1,0 +1,26 @@
+post:
+  summary: Use Orb of Rebirth on user
+  description: >
+    Rebirth the authenticated user, resetting their stats and granting rewards.
+    \
+
+    See: [ApiDoc](https://habitica.com/apidoc/#api-User-UserRebirth)
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          example:
+            error: Authentication failed. Please provide valid userId and apiToken.

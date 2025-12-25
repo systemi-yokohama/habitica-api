@@ -1,0 +1,18 @@
+post:
+  summary: Disable Classes
+  description: Disable the classes feature for the user.
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: User classes disabled successfully
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

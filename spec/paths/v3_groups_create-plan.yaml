@@ -1,0 +1,32 @@
+post:
+  summary: Create Group Plan
+  description: >
+    Create a new group plan. \
+
+    *The official Habitica Doc doesn't provide infomation about the request
+    body, it might be wrong.*
+  tags:
+    - groups
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GroupPlanCreateRequest.yaml
+  responses:
+    '201':
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

@@ -1,0 +1,26 @@
+type: object
+properties:
+  url:
+    type: string
+    description: The webhook's URL.
+  label:
+    type: string
+    description: A label to remind you what this webhook does.
+  enabled:
+    type: boolean
+    description: If the webhook should be enabled.
+  type:
+    type: string
+    enum:
+      - taskActivity
+      - groupChatReceived
+      - userActivity
+      - questActivity
+    description: The webhook's type.
+  options:
+    type: object
+    description: >-
+      The webhook's options. Will differ depending on type. The options are
+      enumerated in the [add webhook
+      examples](https://habitica.com/apidoc/#api-Webhook-UserAddWebhook).
+    additionalProperties: true

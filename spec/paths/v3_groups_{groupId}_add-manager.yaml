@@ -1,0 +1,43 @@
+parameters:
+  - name: groupId
+    in: path
+    required: true
+    schema:
+      type: string
+    description: >-
+      The group _id ('party' for the user party and 'habitrpg' for tavern are
+      accepted)
+post:
+  summary: Add Group Manager
+  description: Add a new manager to the specified group.
+  tags:
+    - groups
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AddOrRemoveManagerRequest.yaml
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

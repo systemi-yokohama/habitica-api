@@ -1,0 +1,37 @@
+parameters:
+  - name: key
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The key of the quest to be purchased.
+post:
+  summary: Buy a quest with gold
+  description: Purchase a quest with gold.
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: >-
+        Bad Request (Specified quest does not exist or not enough gold for the
+        purchase)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

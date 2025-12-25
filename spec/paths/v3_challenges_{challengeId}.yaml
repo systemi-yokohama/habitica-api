@@ -1,0 +1,100 @@
+parameters:
+  - name: challengeId
+    in: path
+    description: ID of the challenge to retrieve
+    required: true
+    schema:
+      type: string
+      format: uuid
+get:
+  summary: Get challenges for a group
+  description: Get challenges hosted in the specified group.
+  tags:
+    - challenges
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: Challenge retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '404':
+      description: Challenge not found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+put:
+  summary: Update a challenge
+  description: |
+    Update a challenge's name, description, or summary. \
+    **Required Permission:** `ChallengeLeader`
+  tags:
+    - challenges
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ChallengeUpdateRequest.yaml
+  responses:
+    '200':
+      description: Challenge updated successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Challenge not found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+delete:
+  summary: Delete a challenge
+  description: Delete the specified challenge by challenge ID.
+  tags:
+    - challenges
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: Challenge deleted successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Challenge not found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

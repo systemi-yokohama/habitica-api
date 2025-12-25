@@ -1,0 +1,37 @@
+parameters:
+  - name: key
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The key of the mystery set to be purchased.
+post:
+  summary: Buy a Mystery Item set
+  description: Purchase a Mystery Item set using an Hourglass.
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: >-
+        Bad Request (Not enough Mystic Hourglasses or specified item doesn't
+        exist or already owned)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

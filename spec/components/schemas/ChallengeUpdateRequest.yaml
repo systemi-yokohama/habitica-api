@@ -1,0 +1,11 @@
+type: object
+properties:
+  name:
+    type: string
+    description: The new full name of the challenge.
+  summary:
+    type: string
+    description: The new challenge summary.
+  description:
+    type: string
+    description: The new challenge description.

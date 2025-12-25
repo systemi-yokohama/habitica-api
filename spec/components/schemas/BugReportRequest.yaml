@@ -1,0 +1,8 @@
+type: object
+properties:
+  message:
+    type: string
+    description: User's Email.
+  email:
+    type: string
+    description: Bug Report Message to sent.

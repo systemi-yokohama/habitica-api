@@ -1,0 +1,32 @@
+parameters:
+  - name: memberId
+    in: path
+    description: ID of the member to retrieve
+    required: true
+    schema:
+      type: string
+      format: uuid
+get:
+  summary: Get habitica member by ID
+  description: Retrieve information about a specific habitica member by member ID.
+  tags:
+    - members
+  responses:
+    '200':
+      description: Member retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Member not found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

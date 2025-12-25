@@ -1,0 +1,48 @@
+parameters:
+  - name: key
+    in: path
+    required: true
+    description: >-
+      The special item to buy. Must be one of the keys from "content.special",
+      such as birthday, snowball, salt.
+    schema:
+      type: string
+      example: snowball
+post:
+  summary: Buy special item (card, avatar transformation)
+  description: >
+    Includes gift cards (e.g., birthday card), and avatar Transformation Items
+    and their antidotes (e.g., Snowball item and Salt reward). \
+
+    See: [ApiDocs](https://habitica.com/apidoc/#api-User-UserBuySpecialSpell)
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

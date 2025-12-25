@@ -1,0 +1,59 @@
+parameters:
+  - name: groupId
+    in: path
+    required: true
+    schema:
+      type: string
+    description: >-
+      The group _id ('party' for the user party and 'habitrpg' for tavern are
+      accepted)
+  - name: keep
+    in: query
+    required: false
+    schema:
+      type: string
+      enum:
+        - remove-all
+        - keep-all
+      default: keep-all
+    description: Specify whether to remove or keep challenges when leaving the group.
+post:
+  summary: Leave a group
+  description: Leave a group.
+  tags:
+    - groups
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/LeaveGroupRequest.yaml
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found (The specified group could not be found)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

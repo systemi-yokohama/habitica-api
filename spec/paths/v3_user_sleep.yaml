@@ -1,0 +1,22 @@
+post:
+  summary: Make the user start / stop sleeping (resting in the Inn)
+  description: Toggles the sleep key under user preference true and false.
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: '"data" current user.preferences.sleep state (true/false)'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

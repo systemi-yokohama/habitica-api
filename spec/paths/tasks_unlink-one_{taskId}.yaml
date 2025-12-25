@@ -1,0 +1,54 @@
+parameters:
+  - name: taskId
+    in: path
+    required: true
+    description: The task _id or alias
+    schema:
+      type: string
+post:
+  summary: Unlink a challenge task
+  description: |
+    Unlink a challenge task \
+    See: [ApiDoc](https://habitica.com/apidoc/#api-Task-UnlinkOneTask)
+  tags:
+    - tasks
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  parameters:
+    - name: keep
+      in: query
+      required: false
+      description: Specifies if the task should be kept(keep) or removed(remove)
+      schema:
+        type: string
+        enum:
+          - keep
+          - remove
+        default: remove
+  responses:
+    '200':
+      description: OK (An empty object)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

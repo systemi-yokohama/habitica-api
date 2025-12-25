@@ -1,0 +1,6 @@
+allOf:
+  - $ref: ./DataResponse.yaml
+  - type: object
+    properties:
+      data:
+        $ref: ./TaskScoreData.yaml

@@ -1,0 +1,35 @@
+parameters:
+  - name: code
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The coupon code to apply.
+post:
+  summary: Redeem a coupon code
+  description: Enter a coupon code to redeem rewards.
+  tags:
+    - coupons
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

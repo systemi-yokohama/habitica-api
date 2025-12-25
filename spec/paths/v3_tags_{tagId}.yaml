@@ -1,0 +1,122 @@
+parameters:
+  - name: tagId
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+      description: The ID of the tag.
+get:
+  summary: Get a Tag
+  description: Get the details of a specific tag for the user's tasks in Habitica.
+  tags:
+    - tags
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: >-
+        Bad Request ("tagId" must be a valid UUID corresponding to a tag
+        belonging to the user.)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found (The specified tag could not be found)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+put:
+  summary: Update Tag
+  description: Update the details of a specific tag for the user's tasks in Habitica.
+  tags:
+    - tags
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TagCreateOrUpdateRequest.yaml
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: >-
+        Bad Request ("tagId" must be a valid UUID corresponding to a tag
+        belonging to the user)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found (The specified tag could not be found)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+delete:
+  summary: Delete a user tag
+  description: Delete a specific tag for the user's tasks in Habitica.
+  tags:
+    - tags
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: >-
+        Bad Request ("tagId" must be a valid UUID corresponding to a tag
+        belonging to the user)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found (The specified tag could not be found)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

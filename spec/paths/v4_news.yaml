@@ -1,0 +1,28 @@
+post:
+  summary: Create news article
+  description: Create a new news article in the Habitica application.
+  tags:
+    - news
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/NewsPost.yaml
+  responses:
+    '200':
+      description: News article created successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

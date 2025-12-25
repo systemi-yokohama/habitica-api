@@ -1,0 +1,42 @@
+post:
+  summary: Allocate a single Stat Point
+  description: |
+    Put a single Stat Point into a specific stat. \
+    See: [ApiDoc](https://habitica.com/apidoc/#api-User-UserAllocate)
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  parameters:
+    - name: stat
+      in: query
+      description: The stat to increase (str, con, int, or per)
+      required: true
+      schema:
+        type: string
+        enum:
+          - str
+          - con
+          - int
+          - per
+  responses:
+    '200':
+      description: Stat Point allocated successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

@@ -1,0 +1,22 @@
+type: object
+properties:
+  success:
+    type: boolean
+    description: Indicates the success status of the response.
+  data:
+    type: object
+    description: The data object.
+    additionalProperties: true
+  notifications:
+    type: array
+    items:
+      type: object
+      additionalProperties: true
+    description: An array of notifications.
+  userV:
+    type: number
+    example: 4212
+  appVersion:
+    type: string
+    description: The app version.
+    example: 4.276.0

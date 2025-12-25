@@ -1,0 +1,5 @@
+type: array
+items:
+  type: string
+  format: uuid
+description: The ID of the user to whom the task will be assigned

@@ -1,0 +1,41 @@
+post:
+  summary: Unlock item or set of items by purchase
+  description: 'See: [ApiDoc](https://habitica.com/apidoc/#api-User-UserUnlock)'
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  parameters:
+    - name: path
+      in: query
+      description: Full path to unlock. See "content" API call for list of items
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

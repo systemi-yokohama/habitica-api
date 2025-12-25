@@ -1,0 +1,8 @@
+type: object
+required:
+  - managerId
+properties:
+  managerId:
+    type: string
+    format: uuid
+    description: The UUID of the user.

@@ -1,0 +1,33 @@
+parameters:
+  - name: page
+    in: query
+    schema:
+      type: integer
+      default: 0
+    description: Page number for pagination (optional)
+get:
+  summary: Get all patrons
+  description: >-
+    Returns an array of objects containing the patrons who backed Habitica's
+    original kickstarter. The array is sorted by the backer tier in descending
+    order. By default, only the first 50 patrons are returned. More can be
+    accessed by passing ?page=n.
+  tags:
+    - hall
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

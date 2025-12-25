@@ -1,0 +1,14 @@
+type: object
+properties:
+  success:
+    type: boolean
+    description: Indicates the success status of the response.
+    example: false
+  error:
+    type: string
+    description: The error code or identifier.
+    example: NotAuthorized
+  message:
+    type: string
+    description: The error message.
+    example: Missing authentication headers.

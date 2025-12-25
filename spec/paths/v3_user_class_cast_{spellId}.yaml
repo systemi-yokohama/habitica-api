@@ -1,0 +1,81 @@
+post:
+  summary: Cast a skill (spell) on yourself or a target
+  description: >
+    **Mage:** fireball = "Burst of Flames", mpheal = "Ethereal Surge", earth =
+    "Earthquake", frost = "Chilling Frost" \
+
+    **Warrior:** smash = "Brutal Smash", defensiveStance = "Defensive Stance",
+    valorousPresence = "Valorous Presence", intimidate = "Intimidating Gaze" \
+
+    **Rogue:** pickPocket = "Pickpocket", backStab = "Backstab", toolsOfTrade =
+    "Tools of the Trade", stealth = "Stealth" \
+
+    **Healer:** heal = "Healing Light", protectAura = "Protective Aura",
+    brightness = "Searing Brightness", healAll = "Blessing" \
+
+    **Transformation Items:** snowball = "Snowball", spookySparkles = "Spooky
+    Sparkles", seafoam = "Seafoam", shinySeed = "Shiny Seed"
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  parameters:
+    - name: spellId
+      in: path
+      description: ID of the spell to cast
+      required: true
+      schema:
+        type: string
+        enum:
+          - fireball
+          - mpheal
+          - earth
+          - frost
+          - smash
+          - defensiveStance
+          - valorousPresence
+          - intimidate
+          - pickPocket
+          - backStab
+          - toolsOfTrade
+          - stealth
+          - heal
+          - protectAura
+          - brightness
+          - healAll
+          - snowball
+          - spookySparkles
+          - seafoam
+          - shinySeed
+    - name: targetId
+      in: query
+      description: User ID of the target (optional)
+      required: false
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '200':
+      description: >
+        Spell cast successfully. \
+
+        Will return the modified targets. For party members only the necessary
+        fields will be populated. The user is always returned.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

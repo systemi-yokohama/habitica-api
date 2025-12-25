@@ -1,0 +1,12 @@
+get:
+  summary: Get latest Bailey announcement
+  description: Get latest Bailey announcement as HTML
+  tags:
+    - news
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/NewsResponse.yaml

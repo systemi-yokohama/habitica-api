@@ -1,0 +1,94 @@
+parameters:
+  - name: groupId
+    in: path
+    description: >-
+      The group id ('party' for the user party and 'habitrpg' for tavern are
+      accepted)
+    required: true
+    schema:
+      type: string
+get:
+  summary: Get group chat messages
+  description: Retrieve the chat messages from the group's chat.
+  tags:
+    - chat
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK (data is an array of chat messages)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+post:
+  summary: Send a chat message in a group
+  description: Send a chat message in the specified group's chat.
+  tags:
+    - chat
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  parameters:
+    - name: previousMsg
+      in: query
+      required: false
+      schema:
+        type: string
+      description: >-
+        The previous chat message's UUID which will force a return of the full
+        group chat.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ChatMessageRequest.yaml
+  responses:
+    '201':
+      description: Created (Sent message)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: >-
+        Bad Request  (Your chat privileges have been revoked or the group ID is
+        invalid)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found (The specified group could not be found)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

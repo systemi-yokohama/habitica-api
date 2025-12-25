@@ -1,0 +1,48 @@
+post:
+  summary: Create a challenge
+  description: Create a new challenge.
+  tags:
+    - challenges
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ChallengeRequest.yaml
+  responses:
+    '200':
+      description: Challenge created successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '201':
+      description: The newly created challenge
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request (Invalid or missing parameter in challenge body)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: >-
+        Unauthorized (Not Authorized or User does not have enough gems to offer
+        this prize)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found (Group or User not found)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

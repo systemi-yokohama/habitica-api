@@ -1,0 +1,9 @@
+type: object
+properties:
+  quantity:
+    type: integer
+    minimum: 1
+    default: 1
+    description: >-
+      Count of items to buy. Defaults to 1 and is ignored for items where
+      quantity is irrelevant.

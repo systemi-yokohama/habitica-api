@@ -1,0 +1,11 @@
+type: object
+properties:
+  text:
+    type: string
+    description: The text of the checklist item
+  completed:
+    type: boolean
+    default: false
+    description: Whether the checklist item is checked off
+required:
+  - text

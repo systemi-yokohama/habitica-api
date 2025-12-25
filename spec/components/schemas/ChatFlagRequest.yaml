@@ -1,0 +1,6 @@
+type: object
+properties:
+  name:
+    type: string
+    description: Explanation why the message was flagged.
+    example: The message is not appropriate.

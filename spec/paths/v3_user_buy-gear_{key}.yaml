@@ -1,0 +1,35 @@
+parameters:
+  - name: key
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The key of the gear to be purchased.
+post:
+  summary: Buy a piece of gear
+  description: Purchase a piece of gear.
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request (Not enough gold for the purchase or already own equipment)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

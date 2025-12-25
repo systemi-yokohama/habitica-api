@@ -1,0 +1,28 @@
+post:
+  summary: Open the Mystery Item box
+  description: Open a mystery item box.
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: Returns Obtained items in data and a success message
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataWithMessageResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

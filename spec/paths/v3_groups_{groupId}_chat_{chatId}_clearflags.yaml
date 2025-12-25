@@ -1,0 +1,56 @@
+parameters:
+  - name: groupId
+    in: path
+    required: true
+    schema:
+      type: string
+      description: >-
+        The group id ('party' for the user party and 'habitrpg' for tavern are
+        accepted)
+  - name: chatId
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+      description: The UUID of the chat message to clear flags from.
+post:
+  summary: Clear flags
+  description: >
+    Resets the flag count on a chat message. Retains the id of the user's that
+    have flagged the message. (Only visible to moderators). \
+
+    **Required Permissions:** Habitica `Admin`
+  tags:
+    - chat
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: Chat flags cleared successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request (Group ID or Chat ID are missing)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: >-
+        Not Found (Insufficient Permissions or Group ID or Chat ID couldn't be
+        find)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

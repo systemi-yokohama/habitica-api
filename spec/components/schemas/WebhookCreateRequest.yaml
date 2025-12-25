@@ -1,0 +1,34 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: The webhook's id.
+  url:
+    type: string
+    description: The webhook's URL.
+  label:
+    type: string
+    description: A label to remind you what this webhook does.
+  enabled:
+    type: boolean
+    description: If the webhook should be enabled.
+    default: true
+  type:
+    type: string
+    description: The webhook's type.
+    enum:
+      - taskActivity
+      - groupChatReceived
+      - userActivity
+      - questActivity
+    default: taskActivity
+  options:
+    type: object
+    description: >-
+      The webhook's options. Will differ depending on type. Required for
+      `groupChatReceived` type. If a webhook supports options, the default
+      values are displayed in the examples below.
+    additionalProperties: true
+required:
+  - url

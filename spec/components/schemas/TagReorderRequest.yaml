@@ -1,0 +1,9 @@
+type: object
+properties:
+  tagId:
+    type: string
+    format: uuid
+    description: The ID of the tag to reorder.
+  to:
+    type: number
+    description: The new position of the tag in the order.

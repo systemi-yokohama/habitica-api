@@ -1,0 +1,32 @@
+parameters:
+  - name: notificationId
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+    description: The ID of the notification to mark as seen.
+post:
+  summary: Mark Notification as Seen
+  description: Mark a specific notification as seen.
+  tags:
+    - notifications
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: >-
+        OK (Notification marked as seen successfully, returns
+        user.notifications)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

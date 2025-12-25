@@ -1,0 +1,25 @@
+servers:
+  - url: https://habitica.com
+parameters:
+  - name: uuid
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+    description: The UUID of the user.
+get:
+  summary: Render a user avatar as a PNG file
+  description: >-
+    **This PNG export feature is not currently working
+    (https://github.com/HabitRPG/habitica/issues/9489).**
+  tags:
+    - data-export
+  responses:
+    '200':
+      description: OK
+      content:
+        image/png:
+          schema:
+            type: string
+            format: binary

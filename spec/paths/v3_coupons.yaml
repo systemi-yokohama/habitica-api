@@ -1,0 +1,29 @@
+get:
+  summary: Get Coupons
+  description: Retrieve a list of available coupons.
+  tags:
+    - coupons
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: List of available coupons retrieved successfully
+      content:
+        text/csv:
+          schema:
+            type: string
+            format: binary
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

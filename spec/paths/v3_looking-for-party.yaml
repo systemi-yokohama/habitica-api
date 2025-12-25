@@ -1,0 +1,39 @@
+get:
+  summary: Get users in search of parties
+  description: |
+    Get users who are looking for a party. \
+    *You must be the leader of a party to be able to use this endpoint.* \
+    See: [ApiDoc](https://habitica.com/apidoc/#api-Group-GetLookingForParty)
+  tags:
+    - party
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  parameters:
+    - name: page
+      in: query
+      required: false
+      schema:
+        type: number
+        default: 0
+      description: Page number, defaults to 0.
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request (You are not the leader of a Party)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

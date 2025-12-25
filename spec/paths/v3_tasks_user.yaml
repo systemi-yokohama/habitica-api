@@ -1,0 +1,84 @@
+get:
+  summary: Get user's tasks
+  description: Retrieve all tasks for the authenticated user.
+  tags:
+    - tasks
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  parameters:
+    - name: type
+      in: query
+      required: false
+      description: >-
+        Optional query parameter to return just a type of tasks. By default all
+        types will be returned except completed todos that must be requested
+        separately. The "completedTodos" type returns only the 30 most recently
+        completed.
+      schema:
+        type: string
+        enum:
+          - habits
+          - dailys
+          - todos
+          - rewards
+          - completedTodos
+    - name: dueDate
+      in: query
+      required: false
+      description: >-
+        Optional date to use for computing the nextDue field for each returned
+        task.
+      schema:
+        type: string
+        format: date
+  responses:
+    '200':
+      description: OK (data contains an array of tasks)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/UserTasksResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+post:
+  summary: Create a new task belonging to the user
+  description: >-
+    Can be passed an object to create a single task or an array of objects to
+    create multiple tasks.
+  tags:
+    - tasks
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UserTaskRequest.yaml
+  responses:
+    '201':
+      description: Task created successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreatedTaskResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

@@ -1,0 +1,79 @@
+get:
+  summary: Get challenges for a user
+  description: >-
+    Get challenges the user has access to. Includes public challenges,
+    challenges belonging to the user's group, and challenges the user has
+    already joined. Returns 10 results per page.
+  tags:
+    - challenges
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  parameters:
+    - name: page
+      in: query
+      description: >-
+        This parameter can be used to specify the page number for the user
+        challenges result (the initial page is number 0).
+      required: true
+      schema:
+        type: number
+        example: 0
+    - name: member
+      in: query
+      description: >-
+        If set to true it limits results to challenges where the user is a
+        member.
+      required: false
+      schema:
+        type: string
+    - name: owned
+      in: query
+      description: >-
+        If set to owned it limits results to challenges owned by the user. If
+        set to not_owned it limits results to challenges not owned by the user.
+      required: false
+      schema:
+        type: string
+    - name: search
+      in: query
+      description: >-
+        Optional query parameter to filter results to challenges that include
+        (even partially) the search query parameter in the name or description.
+      required: false
+      schema:
+        type: string
+    - name: categories
+      in: query
+      description: >-
+        Optional comma separated list of categories. If set it limits results to
+        challenges that are part of the given categories.
+      required: false
+      schema:
+        type: string
+  responses:
+    '200':
+      description: User challenges retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request (Page query parameter must be a positive integer)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found (User could not be found)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

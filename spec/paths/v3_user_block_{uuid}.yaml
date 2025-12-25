@@ -1,0 +1,38 @@
+parameters:
+  - name: uuid
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+      description: The UUID of the user to block.
+post:
+  summary: Block / unblock a user from sending you a PM
+  description: |
+    Block / unblock a user from sending you a PM. \
+    See: [ApiDoc](https://habitica.com/apidoc/#api-User-BlockUser)
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request (Invalid UUID)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

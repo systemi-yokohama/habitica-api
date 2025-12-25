@@ -1,0 +1,47 @@
+get:
+  summary: Get Content
+  description: Get all available content objects.
+  parameters:
+    - name: language
+      in: query
+      schema:
+        type: string
+        enum:
+          - bg
+          - cs
+          - da
+          - de
+          - en
+          - en@pirate
+          - en_GB
+          - es
+          - es_419
+          - fr
+          - he
+          - hu
+          - id
+          - it
+          - ja
+          - nl
+          - pl
+          - pt
+          - pt_BR
+          - ro
+          - ru
+          - sk
+          - sr
+          - sv
+          - uk
+          - zh
+          - zh_TW
+        default: en
+      description: The desired language for the content data.
+  security:
+    - xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml

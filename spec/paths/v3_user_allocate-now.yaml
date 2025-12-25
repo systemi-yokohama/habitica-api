@@ -1,0 +1,27 @@
+post:
+  summary: Allocate all Stat Points
+  description: >
+    "Uses the user's chosen automatic allocation method, or if none, assigns all
+    to STR. Note: will return success, even if there are 0 points to allocate."
+    \
+
+    See: [ApiDoc](https://habitica.com/apidoc/#api-User-UserAllocateNow)
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: Stat points allocated successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

@@ -1,0 +1,36 @@
+parameters:
+  - name: id
+    in: path
+    description: ID of the message to delete
+    required: true
+    schema:
+      type: string
+      format: uuid
+delete:
+  summary: Delete User Message
+  description: Delete a user message by its ID.
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK (Contains all user.inbox.messages)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

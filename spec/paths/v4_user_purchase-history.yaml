@@ -1,0 +1,24 @@
+get:
+  summary: Get user purchase history
+  description: |
+    Retrieve the purchase history for the authenticated user. \
+    See: [ApiDoc](https://habitica.com/apidoc/#api-User-UserGetPurchaseHistory)
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

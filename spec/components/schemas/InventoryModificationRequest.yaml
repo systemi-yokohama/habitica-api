@@ -1,0 +1,34 @@
+type: object
+properties:
+  gear:
+    type: object
+    description: Object to replace user's `gear.owned` object.
+    additionalProperties: true
+  special:
+    type: object
+    description: Object to replace user's `special` object.
+    additionalProperties: true
+  pets:
+    type: object
+    description: Object to replace user's `pets` object.
+    additionalProperties: true
+  mounts:
+    type: object
+    description: Object to replace user's `mounts` object.
+    additionalProperties: true
+  eggs:
+    type: object
+    description: Object to replace user's `eggs` object.
+    additionalProperties: true
+  hatchingPotions:
+    type: object
+    description: Object to replace user's `hatchingPotions` object.
+    additionalProperties: true
+  food:
+    type: object
+    description: Object to replace user's `food` object.
+    additionalProperties: true
+  quests:
+    type: object
+    description: Object to replace user's `quests` object.
+    additionalProperties: true

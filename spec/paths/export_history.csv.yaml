@@ -1,0 +1,27 @@
+servers:
+  - url: https://habitica.com
+get:
+  summary: Export user tasks history in CSV format
+  description: >-
+    History is only available for habits and dailies so todos and rewards won't
+    be included. Can only be used on https://habitica.com.
+  tags:
+    - data-export
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        text/csv:
+          schema:
+            type: string
+            format: binary
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

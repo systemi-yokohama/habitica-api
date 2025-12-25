@@ -1,0 +1,49 @@
+post:
+  summary: Change the class of the authenticated user
+  description: >
+    User must be at least level 10. \
+
+    If "class" is defined and user.flags.classSelected is false it'll change the
+    class. \
+
+    If user.preferences.disableClasses it'll enable classes, otherwise it sets
+    user.flags.classSelected to false (costs 3 gems). \
+
+    See: [ApiDoc](https://habitica.com/apidoc/#api-User-UserChangeClass)
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  parameters:
+    - name: class
+      in: query
+      description: The new class to change to
+      required: true
+      schema:
+        type: string
+        enum:
+          - warrior
+          - rogue
+          - wizard
+          - healer
+  responses:
+    '200':
+      description: User class changed successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

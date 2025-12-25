@@ -1,0 +1,42 @@
+parameters:
+  - name: challengeId
+    in: path
+    description: ID of the challenge to leave
+    required: true
+    schema:
+      type: string
+      format: uuid
+post:
+  summary: Leave Challenge
+  description: Leave a challenge by its ID.
+  tags:
+    - challenges
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/LeaveChallengeRequest.yaml
+  responses:
+    '200':
+      description: Successfully left the challenge
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Challenge not found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

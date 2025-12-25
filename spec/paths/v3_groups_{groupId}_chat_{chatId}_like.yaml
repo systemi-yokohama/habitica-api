@@ -1,0 +1,52 @@
+parameters:
+  - name: groupId
+    in: path
+    required: true
+    schema:
+      type: string
+      description: >-
+        The group id ('party' for the user party and 'habitrpg' for tavern are
+        accepted)
+  - name: chatId
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+      description: The UUID of the chat message to like.
+post:
+  summary: Like Group Chat Message
+  description: Like a message in the group chat of a specific group.
+  tags:
+    - chat
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: >-
+        Bad Request (A user can't like his own message, invalid group or chat
+        ID)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found (The specified group or message could't be found)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

@@ -1,0 +1,36 @@
+put:
+  summary: Update email
+  description: |
+    Change the user email address. \
+    See: [ApiDoc](https://habitica.com/apidoc/#api-User-UpdateEmail)
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UpdateEmailRequest.yaml
+  responses:
+    '200':
+      description: OK (email field, the updated email address)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

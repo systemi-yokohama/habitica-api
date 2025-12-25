@@ -1,0 +1,12 @@
+type: object
+properties:
+  username:
+    type: string
+    description: The new username
+  password:
+    type: string
+    description: >-
+      The user's password if they use local authentication. Omit if they use
+      social auth.
+required:
+  - username

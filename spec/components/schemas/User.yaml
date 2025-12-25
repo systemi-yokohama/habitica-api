@@ -1,0 +1,77 @@
+type: object
+properties:
+  _id:
+    type: string
+    format: uuid
+    description: The User UUID
+  username:
+    type: string
+  auth:
+    type: object
+    properties:
+      local:
+        type: object
+        properties:
+          username:
+            type: string
+          email:
+            type: string
+    description: Authentication details
+  stats:
+    type: object
+    properties:
+      hp:
+        type: number
+        description: Current Health
+      maxHealth:
+        type: number
+        description: Maximum Health
+      mp:
+        type: number
+        description: Current Mana
+      maxMP:
+        type: number
+        description: Maximum Mana
+      lvl:
+        type: integer
+        description: Current Level
+      gp:
+        type: number
+        description: Gold pieces
+      exp:
+        type: number
+        description: Current Experience
+      class:
+        type: string
+        enum:
+          - warrior
+          - wizard
+          - rogue
+          - healer
+      toNextLevel:
+        type: integer
+    additionalProperties: true
+  profile:
+    type: object
+    properties:
+      name:
+        type: string
+      imageUrl:
+        type: string
+      blurb:
+        type: string
+    additionalProperties: true
+  items:
+    type: object
+    description: User inventory (gear, eggs, food, etc.)
+    additionalProperties: true
+  flags:
+    type: object
+    additionalProperties: true
+  preferences:
+    type: object
+    additionalProperties: true
+additionalProperties: true
+required:
+  - text
+  - type

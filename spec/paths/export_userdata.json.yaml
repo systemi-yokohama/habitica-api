@@ -1,0 +1,25 @@
+servers:
+  - url: https://habitica.com
+get:
+  summary: Export user data in JSON format
+  description: Export user data in JSON format.
+  tags:
+    - data-export
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: string
+            format: binary
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

@@ -1,0 +1,10 @@
+type: object
+properties:
+  newEmail:
+    type: string
+    description: The new email address
+  password:
+    type: string
+    description: The user password
+required:
+  - newEmail

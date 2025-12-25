@@ -1,0 +1,11 @@
+type: object
+properties:
+  keepChallenges:
+    type: string
+    enum:
+      - remain-in-challenges
+      - leave-challenges
+    default: leave-challenges
+    description: >-
+      Specify whether to remain in challenges or leave challenges upon leaving
+      the group.

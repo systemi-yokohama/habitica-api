@@ -1,0 +1,67 @@
+parameters:
+  - name: type
+    in: path
+    required: true
+    schema:
+      type: string
+      enum:
+        - gems
+        - eggs
+        - hatchingPotions
+        - premiumHatchingPotions
+        - food
+        - quests
+        - gear
+        - pets
+      default: food
+    description: >-
+      Type of item to purchase. Can be gems, eggs, hatchingPotions,
+      premiumHatchingPotions, food, quests, gear, or pets.
+  - name: key
+    in: path
+    required: true
+    schema:
+      type: string
+    description: Item's key (use "gem" for purchasing gems).
+post:
+  summary: Purchase Gem or Gem-purchasable item
+  description: >-
+    Purchase a Gem-purchasable item of the specified type using the provided
+    key.
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PurchaseItemRequest.yaml
+  responses:
+    '200':
+      description: Item purchased successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataWithMessageResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

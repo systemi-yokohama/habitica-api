@@ -1,0 +1,7 @@
+allOf:
+  - $ref: ./DataResponse.yaml
+  - type: object
+    properties:
+      message:
+        type: string
+        description: Success message.

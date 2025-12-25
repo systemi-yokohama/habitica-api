@@ -1,0 +1,83 @@
+post:
+  tags:
+    - user
+  summary: Register a new user via username and password
+  description: Creates a new user account using a local username, email, and password.
+  operationId: userAuthLocalRegister
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - username
+            - email
+            - password
+            - confirmPassword
+          properties:
+            username:
+              type: string
+              description: The desired username.
+              minLength: 1
+              maxLength: 20
+            email:
+              type: string
+              format: email
+              description: The user's email address.
+            password:
+              type: string
+              format: password
+              description: The password (must be at least 8 characters).
+              minLength: 8
+            confirmPassword:
+              type: string
+              format: password
+              description: Must match the password field.
+  responses:
+    "201":
+      description: User created successfully. Returns the user object and API credentials.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: true
+              data:
+                type: object
+                description: The created user object
+                properties:
+                  _id:
+                    type: string
+                    format: uuid
+                    description: The User ID (UUID)
+                  apiToken:
+                    type: string
+                    format: uuid
+                    description: The API Token for authentication
+                  username:
+                    type: string
+              appId:
+                type: string
+                format: uuid
+                description: The User ID (same as data._id)
+              apiToken:
+                type: string
+                format: uuid
+                description: The API Token (same as data.apiToken)
+    "400":
+      description: Validation error (e.g., passwords do not match, email already in use, username taken).
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              error:
+                type: string
+              message:
+                type: string

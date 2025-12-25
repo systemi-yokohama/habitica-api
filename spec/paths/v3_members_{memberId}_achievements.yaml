@@ -1,0 +1,34 @@
+parameters:
+  - name: memberId
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+    description: The ID of the member whose achievements are to be retrieved.
+get:
+  summary: Get member achievements object
+  description: >-
+    et a list of achievements of the requested member, grouped by basic /
+    seasonal / special.
+  tags:
+    - members
+  responses:
+    '200':
+      description: Successfully retrieved member achievements
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Member not found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

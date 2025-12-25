@@ -1,0 +1,88 @@
+get:
+  summary: Get user's groups
+  description: Retrieve information about groups associated with the user.
+  tags:
+    - groups
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  parameters:
+    - name: type
+      in: query
+      description: >-
+        Type of groups to retrieve (party, guilds, privateGuilds, publicGuilds,
+        tavern)
+      required: true
+      schema:
+        type: string
+        enum:
+          - party
+          - guilds
+          - privateGuilds
+          - publicGuilds
+          - tavern
+      example: party
+    - name: paginate
+      in: query
+      description: Whether to paginate the results (true or false)
+      schema:
+        type: boolean
+      example: false
+    - name: page
+      in: query
+      description: Page number for paginated results (if paginate is true)
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '200':
+      description: User's groups retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+post:
+  summary: Create a Group
+  description: |
+    Create a group in Habitica. \
+    Possible types: `guild` or `party` \
+    Possible privacy: `public` or `private` (party MUST be private)
+  tags:
+    - groups
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CreateOrUpdateGroupRequest.yaml
+  responses:
+    '201':
+      description: Group created successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

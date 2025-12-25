@@ -1,0 +1,59 @@
+parameters:
+  - name: type
+    in: path
+    required: true
+    schema:
+      type: string
+      enum:
+        - pets
+        - mounts
+      default: pets
+      description: The type of item to purchase.
+  - name: key
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The key for the mount/pet.
+post:
+  summary: Purchase Hourglass-purchasable item
+  description: >-
+    Purchases an Hourglass-purchasable item. Does not include Mystery Item sets
+    (use /api/v3/user/buy-mystery-set/{key}).
+  tags:
+    - user
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PurchaseItemRequest.yaml
+  responses:
+    '200':
+      description: Hourglass item purchased successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataWithMessageResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml

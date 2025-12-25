@@ -1,0 +1,48 @@
+parameters:
+  - name: taskId
+    in: path
+    required: true
+    description: The id pr alies of the task that is the original group task
+    schema:
+      type: string
+  - name: userId
+    in: path
+    required: true
+    description: The id of the assigned user
+    schema:
+      type: string
+      format: uuid
+post:
+  summary: Require more work for a group task
+  description: Mark an assigned group task as needing more work before it can be approved
+  tags:
+    - tasks
+  security:
+    - userId: []
+      apiToken: []
+      xClient: []
+  responses:
+    '200':
+      description: OK (The task that needs more work)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataResponse.yaml
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorMessageResponse.yaml
